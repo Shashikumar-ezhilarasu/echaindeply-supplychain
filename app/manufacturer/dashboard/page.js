@@ -1,6 +1,7 @@
 "use client";
 import Link from "next/link";
 import { useEffect, useState } from "react";
+import SidebarDemo from "@/components/sidebar-demo";
 import { db } from '../../../lib/firebase';
 import { collection, getDocs, addDoc, updateDoc, deleteDoc, doc, getDoc, onSnapshot } from "firebase/firestore";
 import {
@@ -135,7 +136,7 @@ export default function ManufacturerDashboard() {
   }
 
   return (
-    <div className="min-h-screen bg-gray-50 p-8">
+    <div className="min-h-screen bg-black text-white p-8">
       <div className="max-w-6xl mx-auto">
         <header className="mb-8">
           <h1 className="text-3xl font-bold text-gray-900 mb-2">Manufacturer Dashboard</h1>
@@ -143,11 +144,7 @@ export default function ManufacturerDashboard() {
         </header>
 
         <div className="mb-8">
-          <Link href="/manufacturer/generate-qr">
-            <button className="bg-blue-600 text-white px-6 py-3 rounded-lg hover:bg-blue-700 transition-colors">
-              Generate QR Code
-            </button>
-          </Link>
+          <SidebarDemo />
         </div>
 
         <form onSubmit={handleAddProduct} className="mb-8 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
