@@ -4,13 +4,13 @@ import { useStacks } from "@/hooks/use-stacks";
 import { abbreviateAddress } from "@/lib/stx-utils";
 import Link from "next/link";
 
-export default function WarehouseLogin() {
+export default function CustomerLogin() {
   const { userData, connectWallet, disconnectWallet } = useStacks();
 
   return (
     <div className="min-h-screen bg-gray-50 flex items-center justify-center p-4">
       <div className="max-w-md w-full bg-white rounded-lg shadow-md p-8">
-        <h1 className="text-2xl font-bold text-center text-gray-900 mb-8">Warehouse Login</h1>
+        <h1 className="text-2xl font-bold text-center text-gray-900 mb-8">Customer Login</h1>
         <div className="space-y-6">
           {!userData ? (
             <button
@@ -38,12 +38,12 @@ export default function WarehouseLogin() {
             </div>
           )}
           {userData && (
-            <Link href="/warehouse/dashboard">
+            <Link href="/customer/scan-info">
               <button
                 type="button"
                 className="w-full bg-blue-600 text-white py-2 px-4 rounded-md hover:bg-blue-700 transition-colors"
               >
-                Go to Dashboard
+                Go to Scan Info
               </button>
             </Link>
           )}
@@ -56,56 +56,4 @@ export default function WarehouseLogin() {
       </div>
     </div>
   );
-}
-import Link from "next/link"
-
-export default function WarehouseLogin() {
-  return (
-    <div className="min-h-screen bg-gray-50 flex items-center justify-center p-4">
-      <div className="max-w-md w-full bg-white rounded-lg shadow-md p-8">
-        <h1 className="text-2xl font-bold text-center text-gray-900 mb-8">Warehouse Login</h1>
-
-        <form className="space-y-6">
-          <div>
-            <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-2">
-              Email
-            </label>
-            <input
-              type="email"
-              id="email"
-              className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-orange-500"
-              placeholder="Enter your email"
-            />
-          </div>
-
-          <div>
-            <label htmlFor="password" className="block text-sm font-medium text-gray-700 mb-2">
-              Password
-            </label>
-            <input
-              type="password"
-              id="password"
-              className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-orange-500"
-              placeholder="Enter your password"
-            />
-          </div>
-
-          <Link href="/warehouse/dashboard">
-            <button
-              type="button"
-              className="w-full bg-orange-600 text-white py-2 px-4 rounded-md hover:bg-orange-700 transition-colors"
-            >
-              Login
-            </button>
-          </Link>
-        </form>
-
-        <div className="mt-6 text-center">
-          <Link href="/" className="text-orange-600 hover:underline">
-            Back to Home
-          </Link>
-        </div>
-      </div>
-    </div>
-  )
 }

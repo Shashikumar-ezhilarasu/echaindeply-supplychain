@@ -3,10 +3,28 @@ import Link from "next/link";
 import { useEffect, useState } from "react";
 import { db } from '../../../lib/firebase';
 import { collection, getDocs, addDoc, updateDoc, deleteDoc, doc, getDoc, onSnapshot } from "firebase/firestore";
+import {
+  stringAsciiCV,
+  stringUtf8CV,
+  uintCV,
+  someCV,
+} from "@stacks/transactions";
 
 export default function ManufacturerDashboard() {
   const [products, setProducts] = useState([]);
-  const [newProduct, setNewProduct] = useState({ name: '', batch: '', ingredients: '' });
+  const [newProduct, setNewProduct] = useState({
+    productId: '',
+    name: '',
+    sku: '',
+    gtin: '',
+    ingredients: '',
+    certifications: '',
+    manufacturer: '',
+    location: '',
+    productionDate: '',
+    expirationDate: '',
+    batch: '',
+  });
   const [selectedProduct, setSelectedProduct] = useState(null);
   const [event, setEvent] = useState({ event_type: '', timestamp: '', location: '', responsibleParty: '', destination: '', shipmentID: '' });
   const [eventLoading, setEventLoading] = useState(false);
@@ -26,14 +44,51 @@ export default function ManufacturerDashboard() {
 
   async function handleAddProduct(e) {
     e.preventDefault();
+    // Example args for Stacks smart contract
+    // Safely parse dates to integer timestamps
+    const prodDate = newProduct.productionDate ? Math.floor(new Date(newProduct.productionDate).getTime() / 1000) : 0;
+    const expDate = newProduct.expirationDate ? Math.floor(new Date(newProduct.expirationDate).getTime() / 1000) : 0;
+    const fnArgs = [
+      stringAsciiCV(newProduct.productId),
+      stringUtf8CV(newProduct.name),
+      stringAsciiCV(newProduct.sku),
+      newProduct.gtin ? someCV(stringAsciiCV(newProduct.gtin)) : someCV(),
+      stringUtf8CV(newProduct.ingredients),
+      stringUtf8CV(newProduct.certifications),
+      stringUtf8CV(newProduct.manufacturer),
+      stringUtf8CV(newProduct.location),
+      uintCV(Number.isInteger(prodDate) ? prodDate : 0),
+      uintCV(Number.isInteger(expDate) ? expDate : 0),
+    ];
+    // Add to Firestore for now
     await addDoc(collection(db, "products"), {
+      productId: newProduct.productId,
       name: newProduct.name,
-      batch: newProduct.batch,
+      sku: newProduct.sku,
+      gtin: newProduct.gtin,
       ingredients: newProduct.ingredients.split(',').map(i => i.trim()),
+      certifications: newProduct.certifications,
+      manufacturer: newProduct.manufacturer,
+      location: newProduct.location,
+      productionDate: newProduct.productionDate,
+      expirationDate: newProduct.expirationDate,
+      batch: newProduct.batch,
       qrCodeUrl: '',
       events: []
     });
-    setNewProduct({ name: '', batch: '', ingredients: '' });
+    setNewProduct({
+      productId: '',
+      name: '',
+      sku: '',
+      gtin: '',
+      ingredients: '',
+      certifications: '',
+      manufacturer: '',
+      location: '',
+      productionDate: '',
+      expirationDate: '',
+      batch: '',
+    });
     const querySnapshot = await getDocs(collection(db, "products"));
     setProducts(querySnapshot.docs.map(doc => ({ id: doc.id, ...doc.data() })));
   }
@@ -95,11 +150,19 @@ export default function ManufacturerDashboard() {
           </Link>
         </div>
 
-        <form onSubmit={handleAddProduct} className="mb-8 flex gap-4 flex-wrap">
+        <form onSubmit={handleAddProduct} className="mb-8 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+          <input placeholder="Product ID" value={newProduct.productId} onChange={e => setNewProduct({ ...newProduct, productId: e.target.value })} required className="border px-3 py-2 rounded" />
           <input placeholder="Name" value={newProduct.name} onChange={e => setNewProduct({ ...newProduct, name: e.target.value })} required className="border px-3 py-2 rounded" />
-          <input placeholder="Batch" value={newProduct.batch} onChange={e => setNewProduct({ ...newProduct, batch: e.target.value })} required className="border px-3 py-2 rounded" />
+          <input placeholder="SKU" value={newProduct.sku} onChange={e => setNewProduct({ ...newProduct, sku: e.target.value })} required className="border px-3 py-2 rounded" />
+          <input placeholder="GTIN" value={newProduct.gtin} onChange={e => setNewProduct({ ...newProduct, gtin: e.target.value })} className="border px-3 py-2 rounded" />
           <input placeholder="Ingredients (comma separated)" value={newProduct.ingredients} onChange={e => setNewProduct({ ...newProduct, ingredients: e.target.value })} required className="border px-3 py-2 rounded" />
-          <button type="submit" className="bg-green-600 text-white px-4 py-2 rounded">Add Product</button>
+          <input placeholder="Certifications" value={newProduct.certifications} onChange={e => setNewProduct({ ...newProduct, certifications: e.target.value })} className="border px-3 py-2 rounded" />
+          <input placeholder="Manufacturer Name" value={newProduct.manufacturer} onChange={e => setNewProduct({ ...newProduct, manufacturer: e.target.value })} required className="border px-3 py-2 rounded" />
+          <input placeholder="Manufacturing Location" value={newProduct.location} onChange={e => setNewProduct({ ...newProduct, location: e.target.value })} required className="border px-3 py-2 rounded" />
+          <input type="date" placeholder="Production Date" value={newProduct.productionDate} onChange={e => setNewProduct({ ...newProduct, productionDate: e.target.value })} required className="border px-3 py-2 rounded" />
+          <input type="date" placeholder="Expiration Date" value={newProduct.expirationDate} onChange={e => setNewProduct({ ...newProduct, expirationDate: e.target.value })} required className="border px-3 py-2 rounded" />
+          <input placeholder="Batch" value={newProduct.batch} onChange={e => setNewProduct({ ...newProduct, batch: e.target.value })} required className="border px-3 py-2 rounded" />
+          <button type="submit" className="bg-green-600 text-white px-4 py-2 rounded col-span-1 md:col-span-2 lg:col-span-3">Add Product</button>
         </form>
 
         <section>
