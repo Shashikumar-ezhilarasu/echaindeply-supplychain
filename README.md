@@ -306,6 +306,8 @@ const createProduct = async (productData) => {
 | Role | Name | GitHub | Contribution |
 |------|------|--------|-------------|
 | **Lead Developer & Blockchain Architect** | [Shashikumar Ezhilarasu](https://github.com/Shashikumar-ezhilarasu) | [@Shashikumar-ezhilarasu](https://github.com/Shashikumar-ezhilarasu) | Full-stack development, Smart contracts, System architecture |
+| **Lead Developer & Blockchain Architect** | Srivatsa | - | Full-stack development, Smart contracts, System architecture |
+| **Lead Developer & Blockchain Architect** | Dhanush | - | Full-stack development, Smart contracts, System architecture |
 
 ### **🎯 Project Responsibilities**
 - **Frontend Development** - React/Next.js application with modern UI/UX
