@@ -10,27 +10,31 @@ import {
   uintCV,
   someCV,
 } from "@stacks/transactions";
+import { useStacks } from "@/hooks/use-stacks";
+
+import {getProduct} from "@/lib/contract.js";
 
 export default function ManufacturerDashboard() {
   const [products, setProducts] = useState([]);
   const [newProduct, setNewProduct] = useState({
-    productId: '',
-    name: '',
-    sku: '',
-    gtin: '',
-    ingredients: '',
-    certifications: '',
-    manufacturer: '',
-    location: '',
-    productionDate: '',
-    expirationDate: '',
-    batch: '',
+    productId: '1001',
+    name: 'Sample Product',
+    sku: 'SKU-001',
+    gtin: '0123456789012',
+    ingredients: 'Water, Sugar, Salt',
+    certifications: 'ISO9001, FDA',
+    manufacturer: 'Acme Corp',
+    location: 'New York, USA',
+    productionDate: new Date().toISOString().slice(0, 10),
+    expirationDate: new Date(Date.now() + 31536000000).toISOString().slice(0, 10), // +1 year
+    batch: 'BATCH-001',
   });
   const [selectedProduct, setSelectedProduct] = useState(null);
   const [event, setEvent] = useState({ event_type: '', timestamp: '', location: '', responsibleParty: '', destination: '', shipmentID: '' });
   const [eventLoading, setEventLoading] = useState(false);
   const [eventError, setEventError] = useState('');
   const [eventSuccess, setEventSuccess] = useState('');
+  const { userData, handleCreateNewProduct } = useStacks();
 
   useEffect(() => {
     // Use Firestore real-time updates for products
@@ -41,6 +45,15 @@ export default function ManufacturerDashboard() {
       }
     );
     return () => unsubscribe();
+  }, []);
+
+  useEffect(() => {
+    // Use Firestore real-time updates for products
+    async function fetchProductById() {
+      const res = await getProduct(1001);
+      console.log(res);
+    }
+    fetchProductById();
   }, []);
 
   async function handleAddProduct(e) {
@@ -77,6 +90,7 @@ export default function ManufacturerDashboard() {
       qrCodeUrl: '',
       events: []
     });
+    handleCreateNewProduct(newProduct);
     setNewProduct({
       productId: '',
       name: '',
