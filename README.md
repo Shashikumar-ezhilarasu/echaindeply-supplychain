@@ -63,7 +63,7 @@ Key innovations include:
 #### **Testnet Deployment**
 ```
 Contract Name: supply-chain-tracker
-Contract Address: ST1234567890ABCDEFGHIJKLMNOPQRSTUVWXYZ1234.supply-chain-tracker
+Contract Address: STHK32FSHBAWT513Y7806RME1BCH44QJKRN2XRQB.product-traceability1
 Deployment Transaction: 0x1234567890abcdef...
 Network: Stacks Testnet
 Block Height: 123456
@@ -72,13 +72,12 @@ Block Height: 123456
 #### **Mainnet Deployment** *(Coming Soon)*
 ```
 Contract Name: supply-chain-tracker
-Contract Address: SP1234567890ABCDEFGHIJKLMNOPQRSTUVWXYZ1234.supply-chain-tracker
 Network: Stacks Mainnet
 Status: Planned for production release
 ```
 
 ### **🔗 Contract Verification**
-- **Explorer Link**: [View on Stacks Explorer](https://explorer.stacks.co/txid/0x1234567890abcdef...)
+- **Explorer Link**: [View on Stacks Explorer](https://explorer.hiro.so/txid/0xa0aeed5da7c6ef8c1a43bf80d7e5cf51eb870a7022c81d22eed32483e31120a3?chain=testnet)
 - **Source Code**: Available in `/contracts` directory
 - **Deployment Script**: `scripts/deploy-contract.js`
 
