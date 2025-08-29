@@ -734,31 +734,6 @@ The project uses shadcn/ui with the following configuration:
 3. **Verify Authenticity** - Check blockchain confirmation
 4. **Access Details** - Download certificates and quality reports
 
-## 🎭 **Key Features Breakdown**
-
-### **🎨 Google Gemini Effect Hero Sections**
-- Scroll-based path animations
-- Custom supply chain messaging
-- Glassmorphism login cards
-- Auto-redirect after wallet connection
-
-### **📈 Interactive Timeline**
-- Scroll-triggered animations
-- Rich content cards with images
-- Real-time progress indicators
-- Mobile-responsive design
-
-### **🔐 Blockchain Integration**
-- Stacks wallet connectivity
-- Address abbreviation utilities
-- Real-time wallet status
-- Secure transaction handling
-
-### **📊 Real-time Dashboard**
-- Live product statistics
-- Collapsible sidebar navigation
-- QR code generation tools
-- Inventory management
 
 ## 🛠️ **Development**
 
