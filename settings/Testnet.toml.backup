@@ -1,0 +1,16 @@
+[network]
+name = "testnet"
+stacks_node_rpc_address = "https://api.testnet.hiro.so"
+deployment_fee_rate = 10
+
+[accounts.deployer]
+mnemonic = "<hip ten team tool ancient chronic plug honey guide ride door same donate ethics charge naive strike glide desk sign slow limit wave dice
+>"
+
+[[deployment.plan.batches]]
+[[deployment.plan.batches.transactions]]
+contract-publish.contract-name = "hello-world"
+contract-publish.expected-sender = "ST1PQHQKV0RJXZFY1DGX8MNSNYVE3VGZJSRTPGZGM"
+contract-publish.cost = 6640
+contract-publish.path = "contracts/hello-world.clar"
+contract-publish.anchor-block-only = true
