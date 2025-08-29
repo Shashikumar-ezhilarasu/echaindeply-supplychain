@@ -13,7 +13,8 @@
 
 
 
-https://github.com/user-attachments/assets/f5730629-126a-427c-8b6b-5f07e4901343
+<img width="2940" height="1392" alt="image" src="https://github.com/user-attachments/assets/141f5732-ba2f-4a68-8ff8-ffcf24ce6e76" />
+
 
 
 ## 📖 **Project Description**
