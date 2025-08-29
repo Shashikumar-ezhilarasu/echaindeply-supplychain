@@ -317,6 +317,12 @@ const createProduct = async (productData) => {
 
 ## 📸 **Screenshots & Demo**
 
+<img width="1095" height="751" alt="Screenshot 2025-08-29 at 12 56 37 PM" src="https://github.com/user-attachments/assets/b046c9e5-f512-4e10-8137-9b4c59c63af7" />
+<img width="1468" height="751" alt="Screenshot 2025-08-29 at 12 56 08 PM" src="https://github.com/user-attachments/assets/a2e6c9f0-abd1-463f-ba75-447481da6200" />
+<img width="1468" height="751" alt="Screenshot 2025-08-29 at 12 55 28 PM" src="https://github.com/user-attachments/assets/c7422482-0deb-4527-8da8-f05785cfe6b6" />
+<img width="1468" height="751" alt="Screenshot 2025-08-29 at 12 54 57 PM" src="https://github.com/user-attachments/assets/dfbde244-7f4c-46eb-b84c-ceeba7f44e3c" />
+<img width="1468" height="751" alt="Screenshot 2025-08-29 at 12 54 43 PM" src="https://github.com/user-attachments/assets/ea7bf086-0922-4f53-a0e5-5756b1a4390b" />
+
 ### **🖼️ Application Screenshots**
 
 #### **Hero Sections with Google Gemini Effect**
