@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import QRCode from 'qrcode';
 import { db } from '../../../lib/firebase';
 import { collection, updateDoc, doc, getDoc, onSnapshot } from "firebase/firestore";
+import { useStacks } from "@/hooks/use-stacks";
 
 export default function VendorDashboard() {
   const [products, setProducts] = useState([]);
@@ -21,10 +22,24 @@ export default function VendorDashboard() {
   const [eventLoading, setEventLoading] = useState(false);
   const [eventError, setEventError] = useState('');
   const [eventSuccess, setEventSuccess] = useState('');
+  const [newProduct, setNewProduct] = useState({
+    productId: '1001',
+    name: 'Sample Product',
+    sku: 'SKU-001',
+    gtin: '0123456789012',
+    ingredients: 'Water, Sugar, Salt',
+    certifications: 'ISO9001, FDA',
+    manufacturer: 'Acme Corp',
+    location: 'New York, USA',
+    productionDate: new Date().toISOString().slice(0, 10),
+    expirationDate: new Date(Date.now() + 31536000000).toISOString().slice(0, 10), // +1 year
+    batch: 'BATCH-001',
+  });
   
   // State for the QR Code Modal
   const [qrCodeUrl, setQrCodeUrl] = useState('');
   const [qrProduct, setQrProduct] = useState(null);
+  const {user, handleCreateNewProduct} = useStacks();
 
   useEffect(() => {
     const unsubscribe = onSnapshot(collection(db, "products"), (snapshot) => {
@@ -53,6 +68,7 @@ export default function VendorDashboard() {
         const productData = productSnap.data();
         const updatedEvents = [...(productData.events || []), event];
         await updateDoc(productRef, { events: updatedEvents });
+        await handleCreateNewProduct(newProduct);
         
         setEvent({ event_type: 'Goods Received', timestamp: '', location: '', responsibleParty: '', temperature: '', humidity: '', inspectionReportUrl: '' });
         setEventSuccess('Event successfully recorded on the blockchain ledger.');

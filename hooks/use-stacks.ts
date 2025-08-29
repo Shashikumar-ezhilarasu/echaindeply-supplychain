@@ -49,16 +49,16 @@ export function useStacks() {
   }, []);
 
   type ProductObj = {
-    productId: string | number;
+    productId: number;
     name: string;
     sku: string;
     gtin: string;
-    ingredients: string | string[];
-    certifications: string | string[];
+    ingredients: string;
+    certifications: string;
     manufacturer: string;
     location: string;
-    productionDate: string | number;
-    expirationDate: string | number;
+    productionDate: number;
+    expirationDate: number;
     batch?: string;
   };
 
@@ -67,6 +67,7 @@ export function useStacks() {
     if (typeof window === "undefined") return;
     try {
       if (!userData) throw new Error("User not connected");
+      
       // Defensive: ensure all fields are defined and not undefined
       const safeProduct = {
         productId: productObj.productId ?? "",
@@ -79,7 +80,15 @@ export function useStacks() {
         location: productObj.location ?? "",
         productionDate: productObj.productionDate ?? "",
         expirationDate: productObj.expirationDate ?? "",
+        batch: productObj.batch ?? "",
       };
+
+      // Convert dates to timestamps
+      const prodTimestamp = safeProduct.productionDate ? 
+        Math.floor(new Date(safeProduct.productionDate).getTime() / 1000) : 0;
+      const expTimestamp = safeProduct.expirationDate ? 
+        Math.floor(new Date(safeProduct.expirationDate).getTime() / 1000) : 0;
+
       const txOptions = await createNewProduct(
         safeProduct.productId,
         safeProduct.name,
@@ -89,12 +98,14 @@ export function useStacks() {
         safeProduct.certifications,
         safeProduct.manufacturer,
         safeProduct.location,
-        safeProduct.productionDate ? Math.floor(new Date(safeProduct.productionDate).getTime() / 1000) : 0,
-        safeProduct.expirationDate ? Math.floor(new Date(safeProduct.expirationDate).getTime() / 1000) : 0
+        prodTimestamp,
+        expTimestamp,
+        safeProduct.batch  // Include batch parameter
       );
+      
       if(!userData) throw new Error("User not connected");
-      try {
-        const result = await openContractCall({
+      
+      const result = await openContractCall({
         ...txOptions,
         network: STACKS_TESTNET,
         appDetails: {
@@ -103,19 +114,18 @@ export function useStacks() {
         },
         postConditionMode: PostConditionMode.Allow,
       });
-      console.log(result);
-      window.alert("Sent create product transaction");
-      } catch(e) {
-        console.error("Error during openContractCall:", e);
-      }
+      
+      console.log('Transaction result:', result);
+      window.alert("Product creation transaction sent successfully!");
       
     } catch (_err) {
-      let message = 'Unknown error';
+      let message = 'Error creating product: ';
       if (_err instanceof Error) {
-        message = _err.message;
-        console.error(_err);
+        message += _err.message;
+        console.error('Error in handleCreateNewProduct:', _err);
       } else {
-        console.error(_err);
+        message += 'Unknown error';
+        console.error('Unknown error:', _err);
       }
       window.alert(message);
     }

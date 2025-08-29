@@ -1,7 +1,10 @@
+"use client";
 import Link from "next/link"
 import TimelineDemo from "@/components/timeline-demo"
+import { useState } from "react";
 
 export default function ScanInfo() {
+  const [verifyOnBlockchain, setVerifyOnBlockchain] = useState(false);
   return (
     <div className="min-h-screen bg-black">
       <div className="max-w-7xl mx-auto">
@@ -57,7 +60,7 @@ export default function ScanInfo() {
               <button className="bg-blue-600 text-white px-6 py-3 rounded-lg hover:bg-blue-700 transition-colors border border-blue-500 shadow-lg">
                 Download Certificate
               </button>
-              <button className="bg-green-600 text-white px-6 py-3 rounded-lg hover:bg-green-700 transition-colors border border-green-500 shadow-lg">
+              <button className="bg-green-600 text-white px-6 py-3 rounded-lg hover:bg-green-700 transition-colors border border-green-500 shadow-lg" onClick={() => setVerifyOnBlockchain(true)}>
                 Verify on Blockchain
               </button>
               <button className="bg-purple-600 text-white px-6 py-3 rounded-lg hover:bg-purple-700 transition-colors border border-purple-500 shadow-lg">
@@ -69,6 +72,9 @@ export default function ScanInfo() {
                 </button>
               </Link>
             </div>
+            {verifyOnBlockchain && <div className="p-10">
+              <h4>Contract address: <span className="text-gray-400">STHK32FSHBAWT513Y7806RME1BCH44QJKRN2XRQB</span>,  Block Explorer: <a href="https://explorer.hiro.so/txid/0xa0aeed5da7c6ef8c1a43bf80d7e5cf51eb870a7022c81d22eed32483e31120a3?chain=testnet" className="text-purple-400 hover:underline">View on Explorer</a></h4>
+            </div>}
           </div>
         </div>
 

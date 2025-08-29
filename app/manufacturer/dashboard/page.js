@@ -58,54 +58,60 @@ export default function ManufacturerDashboard() {
 
   async function handleAddProduct(e) {
     e.preventDefault();
-    // Example args for Stacks smart contract
-    // Safely parse dates to integer timestamps
-    const prodDate = newProduct.productionDate ? Math.floor(new Date(newProduct.productionDate).getTime() / 1000) : 0;
-    const expDate = newProduct.expirationDate ? Math.floor(new Date(newProduct.expirationDate).getTime() / 1000) : 0;
-    const fnArgs = [
-      stringAsciiCV(newProduct.productId),
-      stringUtf8CV(newProduct.name),
-      stringAsciiCV(newProduct.sku),
-      newProduct.gtin ? someCV(stringAsciiCV(newProduct.gtin)) : someCV(),
-      stringUtf8CV(newProduct.ingredients),
-      stringUtf8CV(newProduct.certifications),
-      stringUtf8CV(newProduct.manufacturer),
-      stringUtf8CV(newProduct.location),
-      uintCV(Number.isInteger(prodDate) ? prodDate : 0),
-      uintCV(Number.isInteger(expDate) ? expDate : 0),
-    ];
-    // Add to Firestore for now
-    await addDoc(collection(db, "products"), {
-      productId: newProduct.productId,
-      name: newProduct.name,
-      sku: newProduct.sku,
-      gtin: newProduct.gtin,
-      ingredients: newProduct.ingredients.split(',').map(i => i.trim()),
-      certifications: newProduct.certifications,
-      manufacturer: newProduct.manufacturer,
-      location: newProduct.location,
-      productionDate: newProduct.productionDate,
-      expirationDate: newProduct.expirationDate,
-      batch: newProduct.batch,
-      qrCodeUrl: '',
-      events: []
-    });
-    handleCreateNewProduct(newProduct);
-    setNewProduct({
-      productId: '',
-      name: '',
-      sku: '',
-      gtin: '',
-      ingredients: '',
-      certifications: '',
-      manufacturer: '',
-      location: '',
-      productionDate: '',
-      expirationDate: '',
-      batch: '',
-    });
-    const querySnapshot = await getDocs(collection(db, "products"));
-    setProducts(querySnapshot.docs.map(doc => ({ id: doc.id, ...doc.data() })));
+    
+    try {
+      // Validate required fields
+      if (!newProduct.productId || !newProduct.name || !newProduct.sku || 
+          !newProduct.manufacturer || !newProduct.location || 
+          !newProduct.productionDate || !newProduct.expirationDate || 
+          !newProduct.batch) {
+        alert('Please fill in all required fields');
+        return;
+      }
+
+      // Add to Firestore first
+      await addDoc(collection(db, "products"), {
+        productId: newProduct.productId,
+        name: newProduct.name,
+        sku: newProduct.sku,
+        gtin: newProduct.gtin,
+        ingredients: newProduct.ingredients.split(',').map(i => i.trim()),
+        certifications: newProduct.certifications,
+        manufacturer: newProduct.manufacturer,
+        location: newProduct.location,
+        productionDate: newProduct.productionDate,
+        expirationDate: newProduct.expirationDate,
+        batch: newProduct.batch,
+        qrCodeUrl: '',
+        events: []
+      });
+
+      // Then call the smart contract with all required parameters
+      await handleCreateNewProduct(newProduct);
+      
+      // Reset form
+      setNewProduct({
+        productId: '',
+        name: '',
+        sku: '',
+        gtin: '',
+        ingredients: '',
+        certifications: '',
+        manufacturer: '',
+        location: '',
+        productionDate: '',
+        expirationDate: '',
+        batch: '',
+      });
+      
+      // Refresh products list
+      const querySnapshot = await getDocs(collection(db, "products"));
+      setProducts(querySnapshot.docs.map(doc => ({ id: doc.id, ...doc.data() })));
+      
+    } catch (error) {
+      console.error('Error adding product:', error);
+      alert('Error adding product: ' + error.message);
+    }
   }
 
   async function handleDelete(id) {

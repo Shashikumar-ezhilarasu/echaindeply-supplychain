@@ -3,6 +3,7 @@ import Link from "next/link";
 import { useEffect, useState } from "react";
 import { db } from '../../../lib/firebase'; // Assuming firebase config is in this path
 import { collection, updateDoc, doc, getDoc, onSnapshot } from "firebase/firestore";
+import { useStacks } from "@/hooks/use-stacks";
 
 export default function WarehouseDashboard() {
   const [products, setProducts] = useState([]);
@@ -17,6 +18,20 @@ export default function WarehouseDashboard() {
   const [eventLoading, setEventLoading] = useState(false);
   const [eventError, setEventError] = useState('');
   const [eventSuccess, setEventSuccess] = useState('');
+  const {user, handleCreateNewProduct} = useStacks();
+  const [newProduct, setNewProduct] = useState({
+    productId: '1001',
+    name: 'Sample Product',
+    sku: 'SKU-001',
+    gtin: '0123456789012',
+    ingredients: 'Water, Sugar, Salt',
+    certifications: 'ISO9001, FDA',
+    manufacturer: 'Acme Corp',
+    location: 'New York, USA',
+    productionDate: new Date().toISOString().slice(0, 10),
+    expirationDate: new Date(Date.now() + 31536000000).toISOString().slice(0, 10), // +1 year
+    batch: 'BATCH-001',
+  });
 
   // Fetch all products in real-time from Firestore
   useEffect(() => {
@@ -46,6 +61,7 @@ export default function WarehouseDashboard() {
         const productData = productSnap.data();
         const updatedEvents = [...(productData.events || []), event];
         await updateDoc(productRef, { events: updatedEvents });
+        await handleCreateNewProduct(newProduct);
         
         // Reset form and show success message
         setEvent({ event_type: 'Received at Loading Dock', timestamp: '', location: '', responsibleParty: '', notes: '' });
