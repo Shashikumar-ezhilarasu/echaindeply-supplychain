@@ -136,42 +136,42 @@ export default function ManufacturerDashboard() {
   }
 
   return (
-    <div className="min-h-screen bg-black text-white p-8">
-      <div className="max-w-6xl mx-auto">
+    <div className="min-h-screen bg-black text-white pt-20">
+      <div className="max-w-6xl mx-auto p-8">
         <header className="mb-8">
-          <h1 className="text-3xl font-bold text-gray-900 mb-2">Manufacturer Dashboard</h1>
-          <p className="text-gray-600">Welcome back! Manage your products and generate QR codes.</p>
+          <h1 className="text-3xl font-bold text-white mb-2">Manufacturer Dashboard</h1>
+          <p className="text-gray-300">Welcome back! Manage your products and generate QR codes.</p>
         </header>
 
-        <div className="mb-8">
-          <SidebarDemo />
+        <div className="mb-8 relative z-10">
+          <SidebarDemo products={products} />
         </div>
 
         <form onSubmit={handleAddProduct} className="mb-8 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-          <input placeholder="Product ID" value={newProduct.productId} onChange={e => setNewProduct({ ...newProduct, productId: e.target.value })} required className="border px-3 py-2 rounded" />
-          <input placeholder="Name" value={newProduct.name} onChange={e => setNewProduct({ ...newProduct, name: e.target.value })} required className="border px-3 py-2 rounded" />
-          <input placeholder="SKU" value={newProduct.sku} onChange={e => setNewProduct({ ...newProduct, sku: e.target.value })} required className="border px-3 py-2 rounded" />
-          <input placeholder="GTIN" value={newProduct.gtin} onChange={e => setNewProduct({ ...newProduct, gtin: e.target.value })} className="border px-3 py-2 rounded" />
-          <input placeholder="Ingredients (comma separated)" value={newProduct.ingredients} onChange={e => setNewProduct({ ...newProduct, ingredients: e.target.value })} required className="border px-3 py-2 rounded" />
-          <input placeholder="Certifications" value={newProduct.certifications} onChange={e => setNewProduct({ ...newProduct, certifications: e.target.value })} className="border px-3 py-2 rounded" />
-          <input placeholder="Manufacturer Name" value={newProduct.manufacturer} onChange={e => setNewProduct({ ...newProduct, manufacturer: e.target.value })} required className="border px-3 py-2 rounded" />
-          <input placeholder="Manufacturing Location" value={newProduct.location} onChange={e => setNewProduct({ ...newProduct, location: e.target.value })} required className="border px-3 py-2 rounded" />
-          <input type="date" placeholder="Production Date" value={newProduct.productionDate} onChange={e => setNewProduct({ ...newProduct, productionDate: e.target.value })} required className="border px-3 py-2 rounded" />
-          <input type="date" placeholder="Expiration Date" value={newProduct.expirationDate} onChange={e => setNewProduct({ ...newProduct, expirationDate: e.target.value })} required className="border px-3 py-2 rounded" />
-          <input placeholder="Batch" value={newProduct.batch} onChange={e => setNewProduct({ ...newProduct, batch: e.target.value })} required className="border px-3 py-2 rounded" />
-          <button type="submit" className="bg-green-600 text-white px-4 py-2 rounded col-span-1 md:col-span-2 lg:col-span-3">Add Product</button>
+          <input placeholder="Product ID" value={newProduct.productId} onChange={e => setNewProduct({ ...newProduct, productId: e.target.value })} required className="border border-gray-700 bg-gray-800 text-white px-3 py-2 rounded" />
+          <input placeholder="Name" value={newProduct.name} onChange={e => setNewProduct({ ...newProduct, name: e.target.value })} required className="border border-gray-700 bg-gray-800 text-white px-3 py-2 rounded" />
+          <input placeholder="SKU" value={newProduct.sku} onChange={e => setNewProduct({ ...newProduct, sku: e.target.value })} required className="border border-gray-700 bg-gray-800 text-white px-3 py-2 rounded" />
+          <input placeholder="GTIN" value={newProduct.gtin} onChange={e => setNewProduct({ ...newProduct, gtin: e.target.value })} className="border border-gray-700 bg-gray-800 text-white px-3 py-2 rounded" />
+          <input placeholder="Ingredients (comma separated)" value={newProduct.ingredients} onChange={e => setNewProduct({ ...newProduct, ingredients: e.target.value })} required className="border border-gray-700 bg-gray-800 text-white px-3 py-2 rounded" />
+          <input placeholder="Certifications" value={newProduct.certifications} onChange={e => setNewProduct({ ...newProduct, certifications: e.target.value })} className="border border-gray-700 bg-gray-800 text-white px-3 py-2 rounded" />
+          <input placeholder="Manufacturer Name" value={newProduct.manufacturer} onChange={e => setNewProduct({ ...newProduct, manufacturer: e.target.value })} required className="border border-gray-700 bg-gray-800 text-white px-3 py-2 rounded" />
+          <input placeholder="Manufacturing Location" value={newProduct.location} onChange={e => setNewProduct({ ...newProduct, location: e.target.value })} required className="border border-gray-700 bg-gray-800 text-white px-3 py-2 rounded" />
+          <input type="date" placeholder="Production Date" value={newProduct.productionDate} onChange={e => setNewProduct({ ...newProduct, productionDate: e.target.value })} required className="border border-gray-700 bg-gray-800 text-white px-3 py-2 rounded" />
+          <input type="date" placeholder="Expiration Date" value={newProduct.expirationDate} onChange={e => setNewProduct({ ...newProduct, expirationDate: e.target.value })} required className="border border-gray-700 bg-gray-800 text-white px-3 py-2 rounded" />
+          <input placeholder="Batch" value={newProduct.batch} onChange={e => setNewProduct({ ...newProduct, batch: e.target.value })} required className="border border-gray-700 bg-gray-800 text-white px-3 py-2 rounded" />
+          <button type="submit" className="bg-green-600 hover:bg-green-700 text-white px-4 py-2 rounded col-span-1 md:col-span-2 lg:col-span-3 transition-colors">Add Product</button>
         </form>
 
         <section>
-          <h2 className="text-2xl font-semibold text-gray-800 mb-6">Your Products</h2>
+          <h2 className="text-2xl font-semibold text-white mb-6">Your Products</h2>
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
             {products.map((product) => (
-              <div key={product.id} className="bg-white rounded-lg shadow-md p-6">
-                <h3 className="text-lg font-semibold text-gray-900 mb-2">{product.name}</h3>
-                <p className="text-sm text-gray-600 mb-1">
+              <div key={product.id} className="bg-gray-800 border border-gray-700 rounded-lg shadow-md p-6">
+                <h3 className="text-lg font-semibold text-white mb-2">{product.name}</h3>
+                <p className="text-sm text-gray-300 mb-1">
                   <strong>Batch:</strong> {product.batch}
                 </p>
-                <p className="text-sm text-gray-600">
+                <p className="text-sm text-gray-300">
                   <strong>Ingredients:</strong> {Array.isArray(product.ingredients) ? product.ingredients.join(', ') : product.ingredients}
                 </p>
                 {product.qrCodeUrl && (
@@ -179,25 +179,25 @@ export default function ManufacturerDashboard() {
                     <img src={product.qrCodeUrl} alt="QR Code" style={{ width: 120, height: 120 }} />
                   </div>
                 )}
-                <button onClick={() => handleDelete(product.id)} className="bg-red-500 text-white px-3 py-1 rounded mt-2 mr-2">Delete</button>
-                <button onClick={() => handleUpdate(product.id, prompt('New batch:', product.batch))} className="bg-yellow-500 text-white px-3 py-1 rounded mt-2 mr-2">Update Batch</button>
+                <button onClick={() => handleDelete(product.id)} className="bg-black  text-white px-3 py-1 rounded mt-2 mr-2">Delete</button>
+                <button onClick={() => handleUpdate(product.id, prompt('New batch:', product.batch))} className="bg-black text-white px-3 py-1 rounded mt-2 mr-2">Update Batch</button>
                 <button onClick={() => setSelectedProduct(product.id)} className="bg-blue-500 text-white px-3 py-1 rounded mt-2">View/Add Events</button>
                 {selectedProduct === product.id && (
                   <div className="mt-4">
                     <form onSubmit={e => { e.preventDefault(); handleAddEvent(product.id); }} className="flex gap-2 flex-wrap mb-2">
-                      <input placeholder="Event Type" value={event.event_type} onChange={e => setEvent({ ...event, event_type: e.target.value })} required className="border px-2 py-1 rounded" />
-                      <input placeholder="Timestamp" value={event.timestamp} onChange={e => setEvent({ ...event, timestamp: e.target.value })} required className="border px-2 py-1 rounded" />
-                      <input placeholder="Location" value={event.location} onChange={e => setEvent({ ...event, location: e.target.value })} required className="border px-2 py-1 rounded" />
-                      <input placeholder="Responsible Party" value={event.responsibleParty} onChange={e => setEvent({ ...event, responsibleParty: e.target.value })} required className="border px-2 py-1 rounded" />
-                      <input placeholder="Destination" value={event.destination} onChange={e => setEvent({ ...event, destination: e.target.value })} className="border px-2 py-1 rounded" />
-                      <input placeholder="Shipment ID" value={event.shipmentID} onChange={e => setEvent({ ...event, shipmentID: e.target.value })} className="border px-2 py-1 rounded" />
-                      <button type="submit" className="bg-green-500 text-white px-3 py-1 rounded" disabled={eventLoading}>{eventLoading ? 'Adding...' : 'Add Event'}</button>
+                      <input placeholder="Event Type" value={event.event_type} onChange={e => setEvent({ ...event, event_type: e.target.value })} required className="border border-gray-600 bg-gray-700 text-white px-2 py-1 rounded" />
+                      <input placeholder="Timestamp" value={event.timestamp} onChange={e => setEvent({ ...event, timestamp: e.target.value })} required className="border border-gray-600 bg-gray-700 text-white px-2 py-1 rounded" />
+                      <input placeholder="Location" value={event.location} onChange={e => setEvent({ ...event, location: e.target.value })} required className="border border-gray-600 bg-gray-700 text-white px-2 py-1 rounded" />
+                      <input placeholder="Responsible Party" value={event.responsibleParty} onChange={e => setEvent({ ...event, responsibleParty: e.target.value })} required className="border border-gray-600 bg-gray-700 text-white px-2 py-1 rounded" />
+                      <input placeholder="Destination" value={event.destination} onChange={e => setEvent({ ...event, destination: e.target.value })} className="border border-gray-600 bg-gray-700 text-white px-2 py-1 rounded" />
+                      <input placeholder="Shipment ID" value={event.shipmentID} onChange={e => setEvent({ ...event, shipmentID: e.target.value })} className="border border-gray-600 bg-gray-700 text-white px-2 py-1 rounded" />
+                      <button type="submit" className="bg-green-500 hover:bg-green-600 text-white px-3 py-1 rounded transition-colors" disabled={eventLoading}>{eventLoading ? 'Adding...' : 'Add Event'}</button>
                     </form>
-                    {eventError && <div className="text-red-600 mb-2">{eventError}</div>}
-                    {eventSuccess && <div className="text-green-600 mb-2">{eventSuccess}</div>}
+                    {eventError && <div className="text-black mb-2">{eventError}</div>}
+                    {eventSuccess && <div className="text-green-400 mb-2">{eventSuccess}</div>}
                     <div>
-                      <h4 className="font-semibold mb-1">Events:</h4>
-                      <ul className="list-disc ml-5">
+                      <h4 className="font-semibold mb-1 text-white">Events:</h4>
+                      <ul className="list-disc ml-5 text-gray-300">
                         {(product.events || []).map((ev, idx) => (
                           <li key={idx}>
                             <strong>{ev.event_type}</strong> | {ev.timestamp} | {ev.location} | {ev.responsibleParty} | {ev.destination} | {ev.shipmentID}

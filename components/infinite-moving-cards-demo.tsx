@@ -3,14 +3,14 @@
 import React from "react";
 import { InfiniteMovingCards } from "@/components/ui/infinite-moving-cards";
 
-export default function InfiniteMovingCardsDemo() {
+export default function DoubleInfiniteMovingCardsDemo() {
   return (
-    <div className="h-[40rem] rounded-md flex flex-col antialiased bg-white dark:bg-black dark:bg-grid-white/[0.05] items-center justify-center relative overflow-hidden">
-      <InfiniteMovingCards
-        items={quotes}
-        direction="right"
-        speed="slow"
-      />
+    <div className="h-[50rem] flex flex-col antialiased bg-white dark:bg-black dark:bg-grid-white/[0.05] items-center justify-center gap-10 relative overflow-hidden">
+      {/* First Row - Right to Left */}
+      <InfiniteMovingCards items={quotes} direction="left" speed="slow" />
+
+      {/* Second Row - Left to Right */}
+      <InfiniteMovingCards items={quotesBottom} direction="right" speed="slow" />
     </div>
   );
 }
@@ -18,32 +18,47 @@ export default function InfiniteMovingCardsDemo() {
 const quotes = [
   {
     quote:
-      "Every year, millions are affected by foodborne diseases due to slow traceability. Our system reduces recall time from days to seconds.",
+      "Every year, 600 million people fall ill from contaminated food, and 420,000 die. Traceability delays make recalls too slow to save lives.",
     name: "Hackathon Project",
-    title: "Problem Solved",
+    title: "The Problem",
   },
   {
     quote:
-      "Blockchain ensures that every record is tamper-proof, building consumer trust and protecting brands from fraud.",
+      "Food fraud costs billions annually — from diluted olive oil to mislabeled meat. Blockchain prevents tampering by recording every step immutably.",
     name: "Hackathon Project",
-    title: "Trust Through Transparency",
+    title: "Food Fraud",
   },
   {
     quote:
-      "With real-time traceability, contaminated products can be identified and removed instantly, saving lives and costs.",
+      "Recalls of millions of pounds of poultry and lettuce have shown the weaknesses of traditional supply chains. Blockchain cuts trace time from 7 days to 2.2 seconds.",
     name: "Hackathon Project",
-    title: "Impact",
+    title: "Faster Recalls",
   },
   {
     quote:
-      "Our platform is scalable beyond food — pharmaceuticals, agriculture, and global supply chains can all benefit.",
+      "Illegal production makes up 5–50% of the global food market. Our system provides proof of origin, ensuring authenticity from farm to fork.",
     name: "Hackathon Project",
-    title: "Future Vision",
+    title: "Fighting Illegal Production",
+  },
+];
+
+const quotesBottom = [
+  {
+    quote:
+      "Outbreaks of Salmonella, Listeria, and E. coli can devastate communities. With real-time blockchain traceability, contaminated batches can be isolated instantly.",
+    name: "Hackathon Project",
+    title: "Health Protection",
   },
   {
     quote:
-      "Safe food is not just a choice, it's a right. Technology can make it possible for everyone, everywhere.",
+      "Horse meat scandals and mislabeling show how opaque supply chains fail. Our platform restores trust with transparency and immutable records.",
     name: "Hackathon Project",
-    title: "Mission",
+    title: "Transparency Restored",
+  },
+  {
+    quote:
+      "Beyond food, blockchain traceability applies to pharmaceuticals, agriculture, and global logistics. This is just the beginning.",
+    name: "Hackathon Project",
+    title: "Future Potential",
   },
 ];

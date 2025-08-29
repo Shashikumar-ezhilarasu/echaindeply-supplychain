@@ -23,12 +23,15 @@ export default function Home() {
         <WavyBackgroundDemo />
         <div className="mt-12">
           <WobbleCardDemo />
+          <InfiniteMovingCardsDemo />
         </div>
+        
       </section>
 
       <section className="w-full max-w-6xl mx-auto mb-8">
         <div className="z-50">
           <LampDemo />
+          
           <CardHoverEffectDemo />
         </div>
       </section>
@@ -76,15 +79,15 @@ export default function Home() {
         {/* <div className="mt-12">
           <WobbleCardDemo />
         </div> */}
-        <div className="mt-12">
+        {/* <div className="mt-12">
           <InfiniteMovingCardsDemo />
-        </div>
+        </div> */}
         {/* <div className="mt-12">
           <CardHoverEffectDemo />
         </div> */}
-        <div className="mt-12 w-full">
+        {/* <div className="mt-12 w-full">
           <StickyScrollRevealDemo />
-        </div>
+        </div> */}
       </section>
     </main>
   );

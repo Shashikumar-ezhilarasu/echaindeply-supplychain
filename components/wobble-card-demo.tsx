@@ -11,7 +11,7 @@ export default function WobbleCardDemo() {
         containerClassName="col-span-1 lg:col-span-2 h-full bg-pink-800 min-h-[500px] lg:min-h-[300px]"
         className=""
       >
-        <div className="max-w-xs">
+        <div className="max-w-full">
           <h2 className="text-left text-balance text-base md:text-xl lg:text-3xl font-semibold tracking-[-0.015em] text-white">
             Blockchain for Food Safety
           </h2>
@@ -21,13 +21,6 @@ export default function WobbleCardDemo() {
             both consumers and businesses.
           </p>
         </div>
-        <img
-          src="/placeholder.jpg"
-          width={500}
-          height={500}
-          alt="food safety blockchain demo"
-          className="absolute -right-4 lg:-right-[40%] grayscale filter -bottom-10 object-contain rounded-2xl"
-        />
       </WobbleCard>
 
       {/* Card 2: Transparency */}
@@ -44,23 +37,16 @@ export default function WobbleCardDemo() {
 
       {/* Card 3: Efficiency */}
       <WobbleCard containerClassName="col-span-1 lg:col-span-3 bg-blue-900 min-h-[500px] lg:min-h-[600px] xl:min-h-[300px]">
-        <div className="max-w-sm">
-          <h2 className="max-w-sm md:max-w-lg text-left text-balance text-base md:text-xl lg:text-3xl font-semibold tracking-[-0.015em] text-white">
+        <div className="max-w-full">
+          <h2 className="max-w-full md:max-w-lg text-left text-balance text-base md:text-xl lg:text-3xl font-semibold tracking-[-0.015em] text-white">
             Smarter Supply Chains
           </h2>
-          <p className="mt-4 max-w-[26rem] text-left text-base/6 text-neutral-200">
+          <p className="mt-4 max-w-full text-left text-base/6 text-neutral-200">
             By combining blockchain with IoT and AI, our platform delivers
             real-time insights on origin, storage, and transportation, making
             recalls faster and supply chains more resilient.
           </p>
         </div>
-        <img
-          src="/placeholder.jpg"
-          width={500}
-          height={500}
-          alt="supply chain efficiency"
-          className="absolute -right-10 md:-right-[40%] lg:-right-[20%] -bottom-10 object-contain rounded-2xl"
-        />
       </WobbleCard>
     </div>
   );
