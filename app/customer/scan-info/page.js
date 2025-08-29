@@ -28,9 +28,9 @@ export default function ScanInfo() {
           <div className="bg-gray-900/50 backdrop-blur-lg rounded-lg shadow-xl p-6 border border-gray-700">
             <div className="flex items-center gap-6">
               <img 
-                src="/placeholder.jpg" 
-                alt="Product" 
-                className="w-24 h-24 rounded-lg object-cover border border-gray-600"
+                src="/QR.jpg" 
+                alt="QR Code" 
+                className="w-24 h-24 rounded-lg object-contain border border-gray-600 bg-white p-2"
               />
               <div className="flex-1">
                 <h2 className="text-xl font-semibold text-white mb-2">Organic Apple - Honeycrisp</h2>
