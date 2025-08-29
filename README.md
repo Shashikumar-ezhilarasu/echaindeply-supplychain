@@ -9,7 +9,11 @@
 [![Clarity](https://img.shields.io/badge/Clarity-Smart%20Contracts-green?style=flat-square)](https://clarity-lang.org/)
 
 > **A revolutionary blockchain-powered supply chain traceability platform that ensures product authenticity, transparency, and trust from manufacturer to consumer using Stacks blockchain and Clarity smart contracts.**
-<img width="800" height="379" alt="image" src="https://github.com/user-attachments/assets/75a64f62-7b26-4293-85d0-20238b4cd770" />
+
+
+
+
+https://github.com/user-attachments/assets/f5730629-126a-427c-8b6b-5f07e4901343
 
 
 ## 📖 **Project Description**
